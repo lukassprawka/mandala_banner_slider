@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mandala Banner/Slider</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=latin-ext" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-family: roboto, sans-serif;
+            font-size: 10px;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #ccc;
+        }
+
+        .slider img.color {
+            position: absolute;
+            right: -5%;
+            bottom: 0;
+            height: 36%;
+            z-index: 1;
+            animation: color 4s linear infinite;
+        }
+
+        .slider img.gray {
+            position: absolute;
+            left: -70%;
+            bottom: 0;
+            height: 110%;
+            opacity: .2;
+            animation: gray 4s linear infinite;
+        }
+
+        .slider .mandala {
+            position: absolute;
+            left: 0;
+            top: 10%;
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: text 4s linear infinite;
+        }
+
+        .slider h1 {
+            font-size: 4rem;
+        }
+
+        @media(orientation: landscape) {
+            .slider img.color {
+                right: 3%;
+                height: 46%;
+            }
+
+            .slider img.gray {
+                left: -15%;
+                bottom: -10%;
+                height: 130%;
+            }
+
+            .slider .mandala {
+                left: 40%;
+                top: 10%;
+                width: 60%;
+            }
+        }
+
+        @media(min-width: 1025px) {
+            .slider h1 {
+                font-size: 8rem;
+            }
+        }
+
+        @keyframes color {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 0;
+            }
+
+            13% {
+                opacity: 1;
+            }
+
+            87% {
+                opacity: 1;
+            }
+
+            92% {
+                opacity: 0;
+            }
+
+            100% {
+                transform: translate(-5%, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes gray {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 0;
+            }
+
+            13% {
+                opacity: .2;
+            }
+
+            87% {
+                opacity: .2;
+            }
+
+            92% {
+                opacity: 0;
+            }
+
+            100% {
+                transform: translate(5%, 0) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes text {
+            0% {
+                transform: scale(1);
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 0;
+            }
+
+            13% {
+                opacity: 1;
+            }
+
+            87% {
+                opacity: 1;
+            }
+
+            92% {
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="slider">
+        <img src="img/s1.png" alt="mandala" class="color">
+        <img src="img/s1a.png" alt="mandala szara" class="gray">
+        <div class="mandala">
+            <h1>Pokoloruj</h1>
+        </div>
+
+    </section>
+
+    <script>
+        let activeElement = 0;
+        const timeChange = 4000;
+
+        const colorImgHtml = document.querySelector('.color');
+        const grayImgHtml = document.querySelector('.gray');
+        const h1Html = document.querySelector('.mandala h1');
+
+        const colorImages = ['img/s1.png', 'img/s2.png', 'img/s3.png'];
+        const grayImages = ['img/s1a.png', 'img/s2a.png', 'img/s3a.png'];
+        const texts = ['Pololoruj', 'Swoją', 'Mandalę'];
+
+        function changeElement() {
+            console.log(activeElement);
+            activeElement++;
+            if (activeElement == colorImages.length) {
+                activeElement = 0;
+            }
+            colorImgHtml.src = colorImages[activeElement];
+            grayImgHtml.src = grayImages[activeElement];
+            h1Html.textContent = texts[activeElement];
+        }
+
+        setInterval(changeElement, timeChange);
+    </script>
+</body>
+
+</html>
